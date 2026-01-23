@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo "Code pulled from GitHub successfully"
-                bat 'git --version'
+                bat '"C:\\Users\\2msccsa02\\AppData\\Local\\Programs\\Git\\cmd\\git.exe" --version'
                 bat 'dir'
             }
         }
