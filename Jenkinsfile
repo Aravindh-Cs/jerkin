@@ -1,12 +1,26 @@
 pipeline {
     agent any
 
+    tools {
+        jdk 'JDK11'
+        maven 'Maven39'
+    }
+
     stages {
-        stage('Checkout') {
+        stage('Build') {
             steps {
-                echo "Code pulled from GitHub successfully"
-                bat '"C:\\Users\\2msccsa02\\AppData\\Local\\Programs\\Git\\cmd\\git.exe" --version'
-                bat 'dir'
+                bat 'mvn clean package'
+            }
+        }
+
+        stage('Deploy to Tomcat') {
+            steps {
+                deploy adapters: [tomcat9(
+                    credentialsId: 'tomcat-creds',
+                    url: 'http://localhost:8080'
+                )],
+                contextPath: 'myapp',
+                war: 'target\\myapp.war'
             }
         }
     }
