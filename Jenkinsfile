@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        jdk 'C:\Program Files\Java\jdk-11.0.17'
+        jdk 'JDK'
         maven 'Maven39'
     }
 
